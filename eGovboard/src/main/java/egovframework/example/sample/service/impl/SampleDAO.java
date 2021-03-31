@@ -21,6 +21,7 @@ import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.example.sample.service.SampleVO;
 
 import egovframework.rte.psl.dataaccess.EgovAbstractDAO;
+import egovframework.rte.psl.dataaccess.EgovAbstractMapper;
 
 import org.springframework.stereotype.Repository;
 
@@ -42,16 +43,19 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository("sampleDAO")
-public class SampleDAO extends EgovAbstractDAO {
+//public class SampleDAO extends EgovAbstractDAO {
+public class SampleDAO extends EgovAbstractMapper {
 
+	private String pName ="egovframework.example.sample.service.impl.SampleMapper";
 	/**
 	 * 글을 등록한다.
 	 * @param vo - 등록할 정보가 담긴 SampleVO
 	 * @return 등록 결과
 	 * @exception Exception
 	 */
-	public String insertSample(SampleVO vo) throws Exception {
-		return (String) insert("sampleDAO.insertSample", vo);
+	public int insertSample(SampleVO vo) throws Exception {
+//		return (intger) insert("sampleDAO.insertSample", vo);
+		return (Integer) insert(pName+".insertSample", vo);
 	}
 
 	/**
@@ -61,7 +65,8 @@ public class SampleDAO extends EgovAbstractDAO {
 	 * @exception Exception
 	 */
 	public void updateSample(SampleVO vo) throws Exception {
-		update("sampleDAO.updateSample", vo);
+//		update("sampleDAO.updateSample", vo);
+		update(pName + ".updateSample", vo);
 	}
 
 	/**
@@ -71,7 +76,8 @@ public class SampleDAO extends EgovAbstractDAO {
 	 * @exception Exception
 	 */
 	public void deleteSample(SampleVO vo) throws Exception {
-		delete("sampleDAO.deleteSample", vo);
+//		delete("sampleDAO.deleteSample", vo);
+		delete(pName + ".deleteSample", vo);
 	}
 
 	/**
@@ -81,7 +87,8 @@ public class SampleDAO extends EgovAbstractDAO {
 	 * @exception Exception
 	 */
 	public SampleVO selectSample(SampleVO vo) throws Exception {
-		return (SampleVO) select("sampleDAO.selectSample", vo);
+//		return (SampleVO) select("sampleDAO.selectSample", vo);
+		return (SampleVO) selectOne(pName + ".selectSample", vo);
 	}
 
 	/**
@@ -91,7 +98,8 @@ public class SampleDAO extends EgovAbstractDAO {
 	 * @exception Exception
 	 */
 	public List<?> selectSampleList(SampleDefaultVO searchVO) throws Exception {
-		return list("sampleDAO.selectSampleList", searchVO);
+//		return list("sampleDAO.selectSampleList", searchVO);
+		  return selectList(pName + ".selectSampleList", searchVO);
 	}
 
 	/**
@@ -101,7 +109,8 @@ public class SampleDAO extends EgovAbstractDAO {
 	 * @exception
 	 */
 	public int selectSampleListTotCnt(SampleDefaultVO searchVO) {
-		return (Integer) select("sampleDAO.selectSampleListTotCnt", searchVO);
+//		return (Integer) select("sampleDAO.selectSampleListTotCnt", searchVO);
+		return (Integer) selectOne(pName + ".selectSampleListTotCnt", searchVO);
 	}
 
 }
