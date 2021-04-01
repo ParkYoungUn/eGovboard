@@ -53,8 +53,30 @@
 
 	</select>
 
-	<select id="selectSampleList" parameterType="searchVO" resultType="egovMap">
+	<select id="selectSampleList" parameterType="searchVO" resultType="egovMap"> 
+			
+			SELECT 
+				ID, NAME, DESCRIPTION, USE_YN, REG_USER
+			FROM (
+				SELECT
+				ROWNUM AS rnum, ID, NAME, DESCRIPTION, USE_YN, REG_USER
+				FROM SAMPLE
+			)
+			WHERE 
+				rnum BETWEEN #{firstIndex} AND #{firstIndex} + #{recordCountPerPage} - 1
+				<if test="searchKeyword != null and searchKeyword != ''">
+		        <choose>
+		            <when test="searchCondition == 0">
+						AND	ID LIKE '%' || #{searchKeyword} || '%'
+					</when>
+		            <when test="searchCondition == 1">
+						AND	NAME LIKE '%' || #{searchKeyword} || '%'
+					</when>
+				</choose>
+				</if>
+			ORDER BY ID ASC 
 
+ <!-- 
 			SELECT
 				ID, NAME, DESCRIPTION, USE_YN, REG_USER
 			FROM SAMPLE
@@ -69,8 +91,10 @@
 					</when>
 				</choose>
 			</if>
-			ORDER BY ID ASC
-			LIMIT #{recordCountPerPage} OFFSET #{firstIndex}
+			ORDER BY ID ASC 
+-->
+			<!-- LIMIT #{recordCountPerPage} OFFSET #{firstIndex} -->
+ 
 	</select>
 
 	<select id="selectSampleListTotCnt" parameterType="searchVO" resultType="int">
