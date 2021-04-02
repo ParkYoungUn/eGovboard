@@ -63,16 +63,17 @@
 				FROM SAMPLE
 			)
 			WHERE 
-				rnum BETWEEN #{firstIndex} AND #{firstIndex} + #{recordCountPerPage} - 1
+				1=1 
+				AND rnum BETWEEN #{firstIndex} AND #{firstIndex} + #{recordCountPerPage} - 1
 				<if test="searchKeyword != null and searchKeyword != ''">
-		        <choose>
-		            <when test="searchCondition == 0">
-						AND	ID LIKE '%' || #{searchKeyword} || '%'
-					</when>
-		            <when test="searchCondition == 1">
-						AND	NAME LIKE '%' || #{searchKeyword} || '%'
-					</when>
-				</choose>
+			        <choose>
+			            <when test="searchCondition == 0">
+							AND	ID LIKE '%' || #{searchKeyword} || '%'
+						</when>
+			            <when test="searchCondition == 1">
+							AND	NAME LIKE '%' || #{searchKeyword} || '%'
+						</when>
+					</choose>
 				</if>
 			ORDER BY ID ASC 
 
