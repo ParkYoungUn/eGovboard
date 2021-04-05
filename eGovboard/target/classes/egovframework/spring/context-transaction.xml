@@ -18,6 +18,7 @@
 
 	<aop:config>
 		<aop:pointcut id="requiredTx" expression="execution(* egovframework.example.sample..impl.*Impl.*(..))"/>
+		<aop:pointcut id="requiredTx" expression="execution(* egovframework.example.user..impl.*Impl.*(..))"/>
 		<aop:advisor advice-ref="txAdvice" pointcut-ref="requiredTx" />
 	</aop:config>
 
