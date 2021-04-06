@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 MOPAS(Ministry of Public Administration and Security).
+ * Copyright 2008-2009 the original author or authors.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,33 +20,41 @@ import java.util.List;
 import egovframework.example.sample.service.SampleDefaultVO;
 import egovframework.example.sample.service.SampleVO;
 
-import egovframework.rte.psl.dataaccess.mapper.Mapper;
+import egovframework.rte.psl.dataaccess.EgovAbstractDAO;
+import egovframework.rte.psl.dataaccess.EgovAbstractMapper;
+
+import org.springframework.stereotype.Repository;
 
 /**
- * sample에 관한 데이터처리 매퍼 클래스
+ * @Class Name : SampleDAO.java
+ * @Description : Sample DAO Class
+ * @Modification Information
+ * @
+ * @  수정일      수정자              수정내용
+ * @ ---------   ---------   -------------------------------
+ * @ 2009.03.16           최초생성
  *
- * @author  표준프레임워크센터
- * @since 2014.01.24
+ * @author 개발프레임웍크 실행환경 개발팀
+ * @since 2009. 03.16
  * @version 1.0
- * @see <pre>
- *  == 개정이력(Modification Information) ==
+ * @see
  *
- *          수정일          수정자           수정내용
- *  ----------------    ------------    ---------------------------
- *   2014.01.24        표준프레임워크센터          최초 생성
- *
- * </pre>
+ *  Copyright (C) by MOPAS All right reserved.
  */
-@Mapper("sampleMapper")
-public interface SampleMapper {
 
+@Repository("sampleMapper")
+public class SampleMapper extends EgovAbstractMapper {
+	
 	/**
 	 * 글을 등록한다.
 	 * @param vo - 등록할 정보가 담긴 SampleVO
 	 * @return 등록 결과
 	 * @exception Exception
 	 */
-	void insertSample(SampleVO vo) throws Exception;
+	public int insertSample(SampleVO vo) throws Exception {
+//		return (intger) insert("sampleDAO.insertSample", vo);
+		return (Integer) insert("insertSample", vo);
+	}
 
 	/**
 	 * 글을 수정한다.
@@ -54,7 +62,10 @@ public interface SampleMapper {
 	 * @return void형
 	 * @exception Exception
 	 */
-	void updateSample(SampleVO vo) throws Exception;
+	public void updateSample(SampleVO vo) throws Exception {
+//		update("sampleDAO.updateSample", vo);
+		update("updateSample", vo);
+	}
 
 	/**
 	 * 글을 삭제한다.
@@ -62,7 +73,10 @@ public interface SampleMapper {
 	 * @return void형
 	 * @exception Exception
 	 */
-	void deleteSample(SampleVO vo) throws Exception;
+	public void deleteSample(SampleVO vo) throws Exception {
+//		delete("sampleDAO.deleteSample", vo);
+		delete("deleteSample", vo);
+	}
 
 	/**
 	 * 글을 조회한다.
@@ -70,22 +84,31 @@ public interface SampleMapper {
 	 * @return 조회한 글
 	 * @exception Exception
 	 */
-	SampleVO selectSample(SampleVO vo) throws Exception;
+	public SampleVO selectSample(SampleVO vo) throws Exception {
+//		return (SampleVO) select("sampleDAO.selectSample", vo);
+		return (SampleVO) selectOne("selectSample", vo);
+	}
 
 	/**
 	 * 글 목록을 조회한다.
-	 * @param searchVO - 조회할 정보가 담긴 VO
+	 * @param searchMap - 조회할 정보가 담긴 Map
 	 * @return 글 목록
 	 * @exception Exception
 	 */
-	List<?> selectSampleList(SampleDefaultVO searchVO) throws Exception;
+	public List<?> selectSampleList(SampleDefaultVO searchVO) throws Exception {
+//		return list("sampleDAO.selectSampleList", searchVO);
+		  return selectList("selectSampleList", searchVO);
+	}
 
 	/**
 	 * 글 총 갯수를 조회한다.
-	 * @param searchVO - 조회할 정보가 담긴 VO
+	 * @param searchMap - 조회할 정보가 담긴 Map
 	 * @return 글 총 갯수
 	 * @exception
 	 */
-	int selectSampleListTotCnt(SampleDefaultVO searchVO);
+	public int selectSampleListTotCnt(SampleDefaultVO searchVO) {
+//		return (Integer) select("sampleDAO.selectSampleListTotCnt", searchVO);
+		return (Integer) selectOne("selectSampleListTotCnt", searchVO);
+	}
 
 }

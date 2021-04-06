@@ -1,11 +1,18 @@
 package egovframework.example.user.service;
 
+import java.util.Date;
+
 public class UserVO {
+	
+//	 userId      varchar2(30)    not null,
+//	 userPass    varchar2(100)   not null,
+//	 userName    varchar2(30)    not null,
+//	 regDate     date            default sysdate,
+	
 	private String userId;
-	private String loginId;
+	private String userPass;
 	private String userName;
-	private String userNick;
-	private String userEmail;
+	private Date regDate;
 	
 	public String getUserId() {
 		return userId;
@@ -14,11 +21,11 @@ public class UserVO {
 		this.userId = userId;
 	}
 	
-	public String getLoginId() {
-		return loginId;
+	public String getUserPass() {
+		return userPass;
 	}
-	public void setLoginId(String loginId) {
-		this.loginId = loginId;
+	public void setUserPass(String userPass) {
+		this.userPass = userPass;
 	}
 	
 	public String getUserName() {
@@ -28,25 +35,18 @@ public class UserVO {
 		this.userName = userName;
 	}
 	
-	public String getUserNick() {
-		return userNick;
+	public Date getRegDate() {
+		return regDate;
 	}
-	public void setUserNick(String userNick) {
-		this.userNick = userNick;
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
 	}
-	
-	public String getUserEmail() {
-		return userEmail;
-	}
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-	
 	
 	@Override
 	public String toString() {
-		return "UserVO [userId=" + userId + ", loginId=" + loginId + ", userName=" + userName + ", userNick=" + userNick
-				+ ", userEmail=" + userEmail + "]";
+		return "UserVO [userId=" + userId + ", userPass=" + userPass + ", userName=" + userName + ", regDate=" + regDate
+				+ "]";
 	}
+	
 	
 }

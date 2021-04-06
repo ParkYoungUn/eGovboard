@@ -1,32 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="egovframework.example.user.impl.UserMapper">
+<mapper namespace="egovframework.example.user.service.impl.UserMapper">
 
-	<resultMap id="TB_USER" type="egovframework.example.user.service.UserVO">
-		<result property="userId" column="USER_ID"/>
-		<result property="loginId" column="LOGIN_ID"/>
-		<result property="userName" column="USER_NAME"/>
-		<result property="userNick" column="USER_NICK"/>
-		<result property="userEmail" column="USER_EMAIL"/>
-	</resultMap>
-
-	<!-- 회원가입 -->
-	<insert id="register">
-	    INSERT INTO MP_MEMBER(  USER_ID 
-	   					       ,LOGIN_ID
-	   					       ,USER_NAME
-	   					       ,USER_NICK
-	   					       ,USER_EMAIL 	)
-	                  VALUES(    #{userId} 
-	                 		   , #{loginId}
-	                 		   , #{userName}
-	                 		   , #{userNick}
-	                 		   , #{userEmail})
+	<!-- 회원 가입 -->
+    <insert id="register">
+     insert into TB_USER(userId, userPass, userName)
+     values(#{userId}, #{userPass}, #{userName})   
     </insert>
 
-	<!-- 로그인 -->
-	<select id="login" resultType="egovframework.example.user.service.UserVO">
-		SELECT LOGIN_ID
+	<!-- 로그인 체크 -->
+ 	<select id="loginCheck" resultType="String">
+        SELECT user_name AS userName FROM TB_USER
+        WHERE user_id = #{userId} AND login_id = #{loginId}
+    </select>
+	
+	<!-- 로그인 화면-->
+	<select id="viewUser" resultType="egovframework.example.user.service.UserVO">
+		SELECT USER_ID,LOGIN_ID, USER_NAME, USER_NICK, USER_EMAIL
 		  FROM TB_USER 
 		 WHERE USER_ID = #{userId}
 		   AND LOGIN_ID = #{loginId}
